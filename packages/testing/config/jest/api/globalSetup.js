@@ -5,10 +5,11 @@ const { getPaths } = require('@redwoodjs/internal/dist/paths')
 const rwjsPaths = getPaths()
 
 module.exports = async function () {
+  // Load dotenvs
+  require('dotenv-defaults/config')
+
   if (process.env.SKIP_DB_PUSH !== '1') {
     const process = require('process')
-    // Load dotenvs
-    require('dotenv-defaults/config')
 
     const cacheDirDb = `file:${path.join(__dirname, '.redwood', 'test.db')}`
     process.env.DATABASE_URL = process.env.TEST_DATABASE_URL || cacheDirDb
